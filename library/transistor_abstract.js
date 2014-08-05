@@ -42,9 +42,9 @@
 					definition["attribute"][keyword] = what[keyword]
 				}
 
-				if ( this.library.transistor_keywords_to_parent_map.hasOwnProperty( keyword ) ) { 
+				if ( this.library.transistor_keywords_to_parent_map.map.hasOwnProperty( keyword ) ) { 
 					var keyword_map
-					keyword_map = this.library.transistor_keywords_to_parent_map[keyword]
+					keyword_map = this.library.transistor_keywords_to_parent_map.map[keyword]
 					definition[keyword_map.parent][keyword_map.property] = what[keyword]
 				}
 

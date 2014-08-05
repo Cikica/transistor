@@ -117,7 +117,7 @@
 						value : define.marked.value.concat( created.mark.value )
 					},
 					defined : define.defined.slice(0),
-					for     : created.node
+					for     : define.for
 				})
 			}
 		},

@@ -23,8 +23,7 @@
 		},
 
 		make : function ( what ) {
-			console.log(this.library) 
-			return this.library.transistor_abstract( what )
+			return this.library.transistor_abstract.make( what )
 		}
 	}
 )
