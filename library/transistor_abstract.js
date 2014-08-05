@@ -18,7 +18,8 @@
 			require : [
 				"transistor_base",
 				"transistor_keywords_to_parent_map"
-			]
+			],
+			allow : "*"
 		},
 
 		make : function ( what ) { 

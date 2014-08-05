@@ -16,10 +16,14 @@
 	{
 
 		define : { 
-			allow : "*"
+			allow   : "*",
+			require : [
+				"transistor_abstract"
+			]
 		},
 
-		make : function ( what ) { 
+		make : function ( what ) {
+			console.log(this.library) 
 			return this.library.transistor_abstract( what )
 		}
 	}

@@ -66,7 +66,7 @@
 
 			if ( definition.style ) {
 				style = this.set_node({
-					object : node.style,
+					object : body.style,
 					type   : "property",
 					to     : definition.style
 				})
@@ -74,7 +74,7 @@
 
 			if ( definition.property ) {
 				property = this.set_node({
-					object : node,
+					object : body,
 					type   : "property",
 					to     : definition.property
 				})
@@ -82,7 +82,7 @@
 
 			if ( definition.attribute ) {
 				attribute = this.set_node({
-					object : node,
+					object : body,
 					type   : "attribute",
 					to     : definition.attribute
 				})
