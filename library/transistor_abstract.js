@@ -48,11 +48,16 @@
 					definition[keyword_map.parent][keyword_map.property] = what[keyword]
 				}
 
+				if ( keyword === "mark_as" ) {
+					definition.mark_as = what[keyword]
+				}
+				
 				if ( keyword === "child" ) { 
 					definition.child = this.translate_many({
 						child : what[keyword] 
 					})
 				}
+
 			}
 
 			return definition
