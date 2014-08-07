@@ -16,7 +16,7 @@
 	{
 
 		define : {
-			allow : ".",
+			allow : "*",
 		},
 
 		create : function ( node ) {

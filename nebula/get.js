@@ -130,9 +130,6 @@
 				}
 				// can put a filter in here that filters all the global variables that decide 
 				// what does into the the app
-				console.log( require )
-				console.log( module_by_path )
-				console.log( module_by_path[require.main_module_name] )
 				module_by_path[require.main_module_name].make()
 			})
 		},

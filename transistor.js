@@ -18,12 +18,17 @@
 		define : { 
 			allow   : "*",
 			require : [
-				"transistor_abstract"
+				"maker"
 			]
 		},
 
 		make : function ( what ) {
-			return this.library.transistor_abstract.make( what )
+			var layer_order
+			layer_order = [
+				"pretty"
+			]
+			console.log( this.library )
+			// return this.library.transistor_abstract.make( what )
 		}
 	}
 )
