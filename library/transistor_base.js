@@ -24,7 +24,7 @@
 			var body
 
 			body = this.create_node( what )
-			
+
 			return { 
 				node      : body.node,
 				mark      : this.merge_two_arrays_into_object({
@@ -34,8 +34,8 @@
 				jump_to   : function ( which ) {
 					if ( this.mark.hasOwnProperty( which.mark ) ) {
 						return ( 
-							which.type === "data" ?
-								this.mark[which.mark].data() : 
+							which.full ?
+								this.mark[which.mark] : 
 								this.mark[which.mark].node
 						)
 					} else { 
@@ -49,6 +49,27 @@
 			}
 		},
 
+		create_mark_as : function ( mark ) {
+			var self = this
+			return { 
+				node            : mark.body,
+				append          : function ( definition ) {
+					var children
+					if ( definition.constructor === Array ) {
+						console.log( definition )
+						children = self.create_children({
+							for     : this.node,
+							defined : definition 
+						})
+					} else { 
+						children = self.create_node( definition ) 
+						children.append_to( this.node )
+					}
+					return children
+				}
+			}
+		},
+
 		create_node : function ( definition ) {
 
 			var mark, body, self, property, attribute, style
@@ -58,10 +79,9 @@
 
 			if ( definition.mark_as ) {
 				mark.name  = mark.name.concat(definition.mark_as)
-				mark.value = mark.value.concat({
-					node : body,
-					data : definition.get_data
-				})
+				mark.value = mark.value.concat(this.create_mark_as({
+					body : body 
+				}))
 			}
 
 			if ( definition.style ) {
@@ -98,18 +118,24 @@
 			}
 		},
 
-		create_children : function ( define ) { 
+		slice_member_out_of_an_array : function ( slice ) {
+			return slice.array.slice( slice.at , slice.at +1 )[0]
+		},
+
+		create_children : function ( define ) {
+
 			define.at     = define.at     || 0
-			define.marked = define.marked || []
+			define.marked = define.marked || { name : [], value : [] }
 
 			if ( define.at >= define.defined.length ) { 
 				return define.marked
 			} else {
-
-				var created
-				created = this.create_node(define.defined[define.at])
+				slice   = this.slice_member_out_of_an_array({
+					array : define.defined,
+					at    : define.at
+				})
+				created = this.create_node(slice)
 				define.for.appendChild( created.node )
-
 				return this.create_children({
 					at     : define.at + 1,
 					marked : {
@@ -167,7 +193,7 @@
 			
 			merge.at     = merge.at     || 0
 			merge.object = merge.object || {}
-
+			
 			if ( merge.at >= merge.key.length ) { 
 				return merge.object
 			} else { 
@@ -177,8 +203,8 @@
 				merge.object[merge.key[merge.at]] = merge.value[merge.at]
 
 				return this.merge_two_arrays_into_object({
-					key    : [],
-					value  : [],
+					key    : merge.key.slice(0),
+					value  : merge.value.slice(0),
 					at     : merge.at + 1,
 					object : object
 				})
