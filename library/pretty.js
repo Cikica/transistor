@@ -26,7 +26,7 @@
 		},
 
 		create : function ( what ) {
-			
+			console.log( what )
 			var keyword, definition
 			definition = {
 				type      : what.type || "div",

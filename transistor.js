@@ -33,7 +33,7 @@
 				this.library.maker
 			]
 			node_to_parent_map = this.call_layer({
-				with   : window.transistor,
+				with   : definition,
 				layer  : layer_order,
 				method : "create"
 			})
