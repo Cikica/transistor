@@ -1,3 +1,4 @@
+"use strict";
 (function ( window, module ) {
 
 	if ( window.define && window.define.amd ) {
@@ -18,17 +19,52 @@
 		define : { 
 			allow   : "*",
 			require : [
-				"maker"
+				"maker",
+				"pretty",
+				"bowtie"
 			]
 		},
 
 		make : function ( what ) {
-			var layer_order
+			var layer_order, definition, node_to_parent_map, control_map
+			definition  = what || window.transistor
 			layer_order = [
-				"pretty"
+				this.library.pretty,
+				this.library.maker
 			]
-			console.log( this.library )
-			// return this.library.transistor_abstract.make( what )
+			node_to_parent_map = this.call_layer({
+				with   : window.transistor,
+				layer  : layer_order,
+				method : "create"
+			})
+			control_map = this.call_layer({
+				with   : node_to_parent_map,
+				layer  : layer_order.slice(0).reverse(),
+				method : "refine",
+			})
+			return this.library.bowtie.make({
+				body           : this.library.maker.join_parent_to_node_map_by_parent_and_return_base_node({
+					map : node_to_parent_map 
+				}),
+				control_map    : control_map,
+				node_to_parent : node_to_parent_map
+
+			})
+		},
+
+		call_layer : function ( call ) {
+			
+			call.at = call.at || 0
+			if ( call.at >= call.layer.length ) { 
+				return call.with
+			} else {
+				return this.call_layer({
+					layer  : call.layer,
+					at     : call.at + 1,
+					method : call.method,
+					with   : call.layer[call.at][call.method]( call.with )
+				})
+			}
 		}
 	}
 )

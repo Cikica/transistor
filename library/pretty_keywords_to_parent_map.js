@@ -1,3 +1,4 @@
+"use strict";
 (function ( window, module ) {
 
 	if ( window.define && window.define.amd ) {
@@ -8,7 +9,7 @@
 
 		current_scripts     = document.getElementsByTagName("script")
 		this_script         = current_scripts[current_scripts.length-1]
-		module_name         = this_script.getAttribute("data-module-name") || "transistor_keyword_to_parent_map"
+		module_name         = this_script.getAttribute("data-module-name") || "keyword_to_parent_map"
 		window[module_name] = module
 	}
 })(
@@ -25,6 +26,22 @@
 			"id" : {
 				parent   : "attribute", 
 				property : "id"
+			},
+			"value" : {
+				parent   : "attribute", 
+				property : "value"
+			},
+			"val" : {
+				parent   : "attribute", 
+				property : "value"
+			},
+			"href" : {
+				parent   : "attribute", 
+				property : "href"
+			},
+			"src" : {
+				parent   : "attribute", 
+				property : "src"
 			},
 			"text"  : {
 				parent   : "property",
@@ -690,7 +707,7 @@
 				parent   : "style",
 				property : "speak"
 			},
-			"src" : {
+			"s-src" : {
 				parent   : "style",
 				property : "src"
 			},

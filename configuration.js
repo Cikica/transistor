@@ -4,9 +4,9 @@ define({
 	main    : "transistor",
 	module  : [
 		"library/maker",
-		// "library/transistor_base",
-		// "library/transistor_abstract",
-		// "library/transistor_keywords_to_parent_map"
+		"library/pretty",
+		"library/bowtie",
+		"library/pretty_keywords_to_parent_map"
 	],
 	package : []
 })
