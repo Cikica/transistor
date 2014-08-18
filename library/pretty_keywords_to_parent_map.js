@@ -35,6 +35,10 @@
 				parent   : "attribute", 
 				property : "value"
 			},
+			"target" : {
+				parent   : "attribute", 
+				property : "target"
+			},
 			"href" : {
 				parent   : "attribute", 
 				property : "href"
