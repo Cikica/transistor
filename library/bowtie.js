@@ -19,6 +19,7 @@ define({
 			},
 			append : function ( what ) {
 				what.appendChild( this.body )
+				return this
 			}
 		}
 	}
